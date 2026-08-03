@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — Verista QA</title>
+<meta name="description" content="Verista QA is a software quality assurance partner helping engineering teams ship reliable, secure, high-performing applications. Learn who we are and how we work.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff;
+    --bg-soft:#f5f8fc;
+    --bg-soft-2:#eef4fb;
+    --ink:#0b1220;
+    --ink-soft:#54607a;
+    --ink-faint:#8592ac;
+    --blue-50:#eef5ff;
+    --blue-100:#dfebff;
+    --blue-500:#3b7bf0;
+    --blue-600:#2563eb;
+    --blue-700:#1c4fc7;
+    --blue-900:#132b6b;
+    --green:#17a06a;
+    --red:#e35b4f;
+    --border:#e5ebf4;
+    --shadow-sm: 0 1px 2px rgba(13,30,66,.06);
+    --shadow-md: 0 8px 24px rgba(13,30,66,.08);
+    --shadow-lg: 0 24px 60px rgba(13,30,66,.14);
+    --radius-lg: 20px;
+    --radius-md: 14px;
+    --radius-sm: 10px;
+    --maxw: 1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+  body{
+    margin:0;
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.55;
+  }
+  h1,h2,h3,h4{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    color:var(--ink);
+    margin:0;
+    letter-spacing:-0.02em;
+  }
+  p{margin:0;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;margin:0;padding:0;}
+  img,svg{display:block;max-width:100%;}
+  button{font-family:inherit;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px; font-weight:600; letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--blue-600);
+    background:var(--blue-50);
+    border:1px solid var(--blue-100);
+    padding:6px 14px 6px 10px;
+    border-radius:999px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex:none;box-shadow:0 0 0 3px rgba(23,160,106,.18);}
+
+  /* Buttons */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-weight:600; font-size:15px;
+    padding:13px 24px;
+    border-radius:999px;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+    white-space:nowrap;
+  }
+  .btn:focus-visible{outline:2.5px solid var(--blue-600); outline-offset:3px;}
+  .btn-primary{
+    background:var(--blue-600); color:#fff;
+    box-shadow:0 10px 24px rgba(37,99,235,.28);
+  }
+  .btn-primary:hover{background:var(--blue-700); transform:translateY(-2px); box-shadow:0 14px 30px rgba(37,99,235,.35);}
+  .btn-secondary{
+    background:#fff; color:var(--ink); border-color:var(--border);
+    box-shadow:var(--shadow-sm);
+  }
+  .btn-secondary:hover{border-color:var(--blue-600); color:var(--blue-700); transform:translateY(-2px); box-shadow:var(--shadow-md);}
+  .btn-ghost-light{background:rgba(255,255,255,.12); color:#fff; border-color:rgba(255,255,255,.35);}
+  .btn-ghost-light:hover{background:rgba(255,255,255,.2); transform:translateY(-2px);}
+  .btn-sm{padding:10px 18px; font-size:14px;}
+
+  /* Header */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(255,255,255,.82);
+    backdrop-filter:saturate(180%) blur(14px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:76px;}
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:19px;}
+  .brand .mark{
+    width:34px;height:34px;border-radius:10px;
+    background:linear-gradient(155deg,var(--blue-500),var(--blue-700));
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 16px rgba(37,99,235,.35);
+    flex:none;
+  }
+  .brand .mark svg{width:18px;height:18px;}
+  .nav-links{display:flex;align-items:center;gap:32px;}
+  .nav-links a{font-size:14.5px;font-weight:500;color:var(--ink-soft);transition:color .15s ease;}
+  .nav-links a:hover{color:var(--blue-700);}
+  .nav-links a.active{color:var(--blue-700);}
+  .nav-cta{display:flex;align-items:center;gap:14px;}
+  .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px;}
+  .nav-toggle span{display:block;width:22px;height:2px;background:var(--ink);margin:5px 0;border-radius:2px;transition:transform .2s ease, opacity .2s ease;}
+
+  section{padding:100px 0;}
+  .section-head{max-width:640px;margin:0 auto 56px;text-align:center;}
+  .section-head.left{margin:0 0 48px;text-align:left;}
+  .section-head h2{font-size:clamp(28px,3.2vw,38px);font-weight:800;margin:16px 0 14px;}
+  .section-head p{color:var(--ink-soft);font-size:16.5px;}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in-view{opacity:1;transform:translateY(0);}
+
+  /* Page hero (shorter than home hero) */
+  .about-hero{
+    position:relative; padding:76px 0 88px; overflow:hidden;
+    background:radial-gradient(680px 380px at 82% -8%, rgba(37,99,235,.10), transparent 60%), var(--bg);
+  }
+  .about-hero .wrap{max-width:760px; text-align:center;}
+  .about-hero h1{font-size:clamp(32px,4.2vw,50px);line-height:1.08;font-weight:800;margin:20px 0 20px;}
+  .about-hero h1 em{font-style:normal;color:var(--blue-600);}
+  .about-hero p.lead{font-size:18px;color:var(--ink-soft);max-width:600px;margin:0 auto;}
+  .art-blob{position:absolute;border-radius:50%;z-index:0;}
+  .blob-1{width:360px;height:360px;background:radial-gradient(circle at 30% 30%, var(--blue-100), transparent 70%);right:-60px;top:-80px;}
+  .blob-2{width:300px;height:300px;background:radial-gradient(circle at 30% 30%, var(--blue-100), transparent 70%);left:-80px;bottom:-100px;}
+
+  /* Story */
+  .story{background:#fff;}
+  .story-grid{display:grid;grid-template-columns:1fr 0.95fr;gap:64px;align-items:center;}
+  .story-copy p{color:var(--ink-soft);font-size:15.5px;margin-bottom:18px;}
+  .story-copy p:last-child{margin-bottom:0;}
+
+  .story-panel{
+    background:var(--bg-soft); border:1px solid var(--border); border-radius:var(--radius-lg);
+    padding:36px; box-shadow:var(--shadow-md);
+  }
+  .story-stats{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  .story-stat{background:#fff;border:1px solid var(--border);border-radius:var(--radius-md);padding:20px;box-shadow:var(--shadow-sm);}
+  .story-stat .num{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:26px;color:var(--blue-700);}
+  .story-stat .lbl{font-size:12.5px;color:var(--ink-faint);margin-top:4px;}
+
+  /* Timeline (genuine sequence -> numbered markers justified) */
+  .timeline-sec{background:var(--bg-soft);}
+  .timeline{position:relative;max-width:780px;margin:0 auto;}
+  .timeline::before{
+    content:"";position:absolute;left:23px;top:6px;bottom:6px;width:2px;background:var(--border);
+  }
+  .tl-item{position:relative;padding-left:64px;margin-bottom:40px;}
+  .tl-item:last-child{margin-bottom:0;}
+  .tl-marker{
+    position:absolute;left:0;top:0;width:47px;height:47px;border-radius:50%;
+    background:#fff;border:2px solid var(--blue-600);color:var(--blue-700);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono',monospace;font-weight:600;font-size:12.5px;
+    box-shadow:0 0 0 6px var(--bg-soft), var(--shadow-sm);
+  }
+  .tl-item h4{font-size:17px;font-weight:700;margin-bottom:6px;}
+  .tl-item p{font-size:14.5px;color:var(--ink-soft);}
+
+  /* Values */
+  .values{background:#fff;}
+  .val-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+  .val-card{
+    background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);
+    padding:28px 24px; box-shadow:var(--shadow-sm);
+    transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+  }
+  .val-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--blue-100);}
+  .val-icon{
+    width:44px;height:44px;border-radius:12px;
+    background:var(--blue-50); border:1px solid var(--blue-100);
+    display:flex;align-items:center;justify-content:center;margin-bottom:18px;
+  }
+  .val-icon svg{width:21px;height:21px;color:var(--blue-600);}
+  .val-card h3{font-size:16.5px;font-weight:700;margin-bottom:8px;}
+  .val-card p{color:var(--ink-soft);font-size:14px;}
+
+  /* Team */
+  .team{background:var(--bg-soft);}
+  .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+  .team-card{
+    background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);
+    padding:26px; text-align:center; box-shadow:var(--shadow-sm);
+    transition:transform .22s ease, box-shadow .22s ease;
+  }
+  .team-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);}
+  .team-avatar{
+    width:72px;height:72px;border-radius:50%;margin:0 auto 16px;
+    background:linear-gradient(155deg,var(--blue-100),var(--blue-600));
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;color:#fff;font-size:20px;
+  }
+  .team-card h4{font-size:15.5px;font-weight:700;margin-bottom:3px;}
+  .team-card .role{font-size:12.5px;color:var(--blue-600);font-weight:600;margin-bottom:10px;}
+  .team-card p{font-size:13px;color:var(--ink-soft);}
+
+  /* CTA banner (shared style) */
+  .cta-banner{
+    background:linear-gradient(135deg,var(--blue-700),var(--blue-900));
+    border-radius:28px; margin:0 28px; padding:64px 56px;
+    display:flex;align-items:center;justify-content:space-between;gap:40px;
+    position:relative; overflow:hidden;
+  }
+  .cta-banner::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(420px 260px at 90% 0%, rgba(255,255,255,.14), transparent 60%);
+  }
+  .cta-banner h2{color:#fff;font-size:clamp(24px,2.8vw,32px);margin-bottom:10px;max-width:480px;}
+  .cta-banner p{color:#c9d7fb;font-size:15.5px;max-width:440px;}
+  .cta-banner .cta-actions{display:flex;gap:14px;flex-wrap:wrap;position:relative;z-index:1;}
+  .cta-left{position:relative;z-index:1;}
+
+  /* Footer (shared) */
+  footer{background:var(--ink);color:#c3cbe0;padding:64px 0 28px;}
+  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.08);}
+  .foot-brand .brand{color:#fff;margin-bottom:14px;}
+  .foot-brand p{font-size:13.5px;color:#8b96b8;max-width:280px;}
+  .foot-col h5{font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;color:#7c88ac;margin-bottom:16px;font-weight:600;}
+  .foot-col ul{display:flex;flex-direction:column;gap:11px;}
+  .foot-col a{font-size:14px;color:#c3cbe0;transition:color .15s ease;}
+  .foot-col a:hover{color:#fff;}
+  .foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;font-size:13px;color:#7c88ac;flex-wrap:wrap;gap:12px;}
+  .foot-bottom a{color:#7c88ac;}
+  .foot-bottom a:hover{color:#fff;}
+
+  /* Responsive */
+  @media (max-width:980px){
+    .story-grid{grid-template-columns:1fr;}
+    .val-grid{grid-template-columns:repeat(2,1fr);}
+    .team-grid{grid-template-columns:repeat(2,1fr);}
+    .cta-banner{flex-direction:column;text-align:center;align-items:center;padding:48px 32px;}
+    .cta-left{display:flex;flex-direction:column;align-items:center;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:720px){
+    .nav-links, .nav-cta .btn-secondary{display:none;}
+    .nav-toggle{display:block;}
+    body.menu-open .nav-links{
+      display:flex;flex-direction:column;position:absolute;top:76px;left:0;right:0;
+      background:#fff;border-bottom:1px solid var(--border);padding:20px 28px;gap:18px;
+      box-shadow:var(--shadow-md);
+    }
+    .val-grid{grid-template-columns:1fr;}
+    .team-grid{grid-template-columns:1fr;}
+    .story-stats{grid-template-columns:1fr 1fr;}
+    .foot-grid{grid-template-columns:1fr;gap:28px;}
+    .cta-banner{margin:0 16px;}
+    .timeline::before{left:19px;}
+    .tl-item{padding-left:54px;}
+    .tl-marker{width:39px;height:39px;font-size:11px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="brand">
+      <span class="mark">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5L9.5 17L19 7" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      Verista QA
+    </a>
+    <nav class="nav-links">
+      <a href="index.html#services">Services</a>
+      <a href="index.html#process">Process</a>
+      <a href="index.html#why">Why Us</a>
+      <a href="about.html" class="active">About</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="index.html#contact" class="btn btn-secondary btn-sm">Book a Free Consultation</a>
+      <button class="nav-toggle" aria-label="Toggle menu" id="navToggle">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ABOUT HERO -->
+  <section class="about-hero">
+    <div class="art-blob blob-1"></div>
+    <div class="art-blob blob-2"></div>
+    <div class="wrap">
+      <span class="eyebrow"><span class="dot"></span> About Verista QA</span>
+      <h1>We started Verista because <em>bugs shouldn't reach your users.</em></h1>
+      <p class="lead">We're a team of QA engineers who got tired of watching testing get squeezed out of release cycles — so we built a practice that fits into the sprint instead of slowing it down.</p>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="story">
+    <div class="wrap story-grid">
+      <div class="story-copy reveal">
+        <span class="eyebrow"><span class="dot"></span> Our Story</span>
+        <h2 style="margin:16px 0 20px;font-size:clamp(24px,2.8vw,32px);">Built by engineers who were tired of finding bugs after launch</h2>
+        <p>Verista QA started as a small team of manual and automation testers frustrated by the same pattern at every company we worked with: QA got looped in too late, testing got cut when deadlines slipped, and the same categories of bugs kept reaching production.</p>
+        <p>So we built a practice around the opposite approach — QA embedded from the planning stage, automated coverage that grows with the codebase, and reporting clear enough that engineers can act on it without a meeting.</p>
+        <p>Today we work as an extension of engineering teams, not an outside checkpoint, covering everything from exploratory manual testing to performance, security, API, and mobile testing.</p>
+      </div>
+
+      <div class="story-panel reveal">
+        <div class="story-stats">
+          <div class="story-stat"><div class="num">2019</div><div class="lbl">Founded</div></div>
+          <div class="story-stat"><div class="num">40+</div><div class="lbl">Teams supported</div></div>
+          <div class="story-stat"><div class="num">500+</div><div class="lbl">Test cycles delivered</div></div>
+          <div class="story-stat"><div class="num">99.2%</div><div class="lbl">Defect catch rate</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="timeline-sec">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow" style="background:#fff;"><span class="dot"></span> Milestones</span>
+        <h2>How we got here</h2>
+        <p>A quick look at the path from a two-person testing team to a full QA practice.</p>
+      </div>
+
+      <div class="timeline reveal">
+        <div class="tl-item">
+          <div class="tl-marker">2019</div>
+          <h4>Verista is founded</h4>
+          <p>Started as a two-person manual testing team working with early-stage startups.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-marker">2021</div>
+          <h4>Automation practice launched</h4>
+          <p>Built out dedicated Selenium and Cypress capability as clients moved to continuous deployment.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-marker">2023</div>
+          <h4>Performance &amp; security added</h4>
+          <p>Expanded scope to load testing and vulnerability assessments as client applications scaled.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-marker">2026</div>
+          <h4>Full-scope QA partner</h4>
+          <p>Now covering manual, automation, performance, security, API, and mobile testing for 40+ teams.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="values">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow"><span class="dot"></span> What We Value</span>
+        <h2>The principles behind every test cycle</h2>
+        <p>These are the standards we hold ourselves to on every engagement, big or small.</p>
+      </div>
+
+      <div class="val-grid">
+        <div class="val-card reveal">
+          <div class="val-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M9 11l3 3L22 4M21 12v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>Quality obsessed</h3>
+          <p>We test the way we'd want our own product tested — thoroughly, and without cutting corners near a deadline.</p>
+        </div>
+        <div class="val-card reveal">
+          <div class="val-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5m0 14h16M8 15v-4m4 4V8m4 7v-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>Radically transparent</h3>
+          <p>Clear defect reports, honest coverage numbers, and no dressing up results to make a sprint look better.</p>
+        </div>
+        <div class="val-card reveal">
+          <div class="val-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+          <h3>Fast by default</h3>
+          <p>Critical issues get flagged within hours, not folded into a report you see the following week.</p>
+        </div>
+        <div class="val-card reveal">
+          <div class="val-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m5-7.13a4 4 0 110 8 4 4 0 010-8z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>Partners, not vendors</h3>
+          <p>We learn your product well enough to challenge decisions, not just execute a test script handed to us.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="team">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow" style="background:#fff;"><span class="dot"></span> Our Team</span>
+        <h2>The people behind the test reports</h2>
+        <p>A small team of senior QA engineers — placeholder profiles below, ready to swap in your real team.</p>
+      </div>
+
+      <div class="team-grid">
+        <div class="team-card reveal">
+          <div class="team-avatar">AK</div>
+          <h4>Amara Khan</h4>
+          <div class="role">Founder &amp; QA Lead</div>
+          <p>13 years in manual and automated testing across fintech and healthcare.</p>
+        </div>
+        <div class="team-card reveal">
+          <div class="team-avatar">DM</div>
+          <h4>Daniel Moss</h4>
+          <div class="role">Automation Lead</div>
+          <p>Builds and maintains Selenium and Playwright suites for high-release-frequency teams.</p>
+        </div>
+        <div class="team-card reveal">
+          <div class="team-avatar">RP</div>
+          <h4>Riya Patel</h4>
+          <div class="role">Security Testing Lead</div>
+          <p>Focused on vulnerability assessment and penetration testing for web applications.</p>
+        </div>
+        <div class="team-card reveal">
+          <div class="team-avatar">JT</div>
+          <h4>Jonas Trần</h4>
+          <div class="role">Performance Engineer</div>
+          <p>Runs load and scalability testing for teams preparing for major traffic events.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding-top:0;padding-bottom:100px;">
+    <div class="cta-banner reveal">
+      <div class="cta-left">
+        <h2>Want to see how we'd approach your product?</h2>
+        <p>Book a free consultation and we'll walk through where testing coverage matters most for your release cycle.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="mailto:hello@veristaqa.com" class="btn btn-primary">Book a Free Consultation</a>
+        <a href="index.html#services" class="btn btn-ghost-light">View Our Services</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="index.html" class="brand">
+          <span class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5L9.5 17L19 7" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Verista QA
+        </a>
+        <p>Manual, automated, performance, security, API, and mobile testing for teams that ship often and can't afford to ship broken.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="index.html#services">Manual Testing</a></li>
+          <li><a href="index.html#services">Automation Testing</a></li>
+          <li><a href="index.html#services">Performance Testing</a></li>
+          <li><a href="index.html#services">Security Testing</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="index.html#process">Our Process</a></li>
+          <li><a href="index.html#why">Why Verista</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="mailto:hello@veristaqa.com">hello@veristaqa.com</a></li>
+          <li><a href="tel:+10000000000">+1 (000) 000-0000</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 Verista QA. All rights reserved.</span>
+      <span><a href="index.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="index.html">Terms of Service</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  navToggle.addEventListener('click', () => {
+    document.body.classList.toggle('menu-open');
+  });
+  document.querySelectorAll('.nav-links a').forEach(a=>{
+    a.addEventListener('click', ()=> document.body.classList.remove('menu-open'));
+  });
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
