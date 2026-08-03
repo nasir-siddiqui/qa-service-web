@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verista QA — Software Quality Assurance That Ships With You</title>
+<meta name="description" content="Verista QA helps software teams deliver reliable, secure, high-performing applications through manual, automated, performance, security, API and mobile testing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff;
+    --bg-soft:#f5f8fc;
+    --bg-soft-2:#eef4fb;
+    --ink:#0b1220;
+    --ink-soft:#54607a;
+    --ink-faint:#8592ac;
+    --blue-50:#eef5ff;
+    --blue-100:#dfebff;
+    --blue-500:#3b7bf0;
+    --blue-600:#2563eb;
+    --blue-700:#1c4fc7;
+    --blue-900:#132b6b;
+    --green:#17a06a;
+    --red:#e35b4f;
+    --border:#e5ebf4;
+    --shadow-sm: 0 1px 2px rgba(13,30,66,.06);
+    --shadow-md: 0 8px 24px rgba(13,30,66,.08);
+    --shadow-lg: 0 24px 60px rgba(13,30,66,.14);
+    --radius-lg: 20px;
+    --radius-md: 14px;
+    --radius-sm: 10px;
+    --maxw: 1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+  body{
+    margin:0;
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.55;
+  }
+  h1,h2,h3,h4{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    color:var(--ink);
+    margin:0;
+    letter-spacing:-0.02em;
+  }
+  p{margin:0;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;margin:0;padding:0;}
+  img,svg{display:block;max-width:100%;}
+  button{font-family:inherit;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px; font-weight:600; letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--blue-600);
+    background:var(--blue-50);
+    border:1px solid var(--blue-100);
+    padding:6px 14px 6px 10px;
+    border-radius:999px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex:none;box-shadow:0 0 0 3px rgba(23,160,106,.18);}
+
+  /* Buttons */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-weight:600; font-size:15px;
+    padding:13px 24px;
+    border-radius:999px;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+    white-space:nowrap;
+  }
+  .btn:focus-visible{outline:2.5px solid var(--blue-600); outline-offset:3px;}
+  .btn-primary{
+    background:var(--blue-600); color:#fff;
+    box-shadow:0 10px 24px rgba(37,99,235,.28);
+  }
+  .btn-primary:hover{background:var(--blue-700); transform:translateY(-2px); box-shadow:0 14px 30px rgba(37,99,235,.35);}
+  .btn-secondary{
+    background:#fff; color:var(--ink); border-color:var(--border);
+    box-shadow:var(--shadow-sm);
+  }
+  .btn-secondary:hover{border-color:var(--blue-600); color:var(--blue-700); transform:translateY(-2px); box-shadow:var(--shadow-md);}
+  .btn-ghost-light{background:rgba(255,255,255,.12); color:#fff; border-color:rgba(255,255,255,.35);}
+  .btn-ghost-light:hover{background:rgba(255,255,255,.2); transform:translateY(-2px);}
+  .btn-sm{padding:10px 18px; font-size:14px;}
+
+  /* Header */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(255,255,255,.82);
+    backdrop-filter:saturate(180%) blur(14px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:76px;}
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:19px;}
+  .brand .mark{
+    width:34px;height:34px;border-radius:10px;
+    background:linear-gradient(155deg,var(--blue-500),var(--blue-700));
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 16px rgba(37,99,235,.35);
+    flex:none;
+  }
+  .brand .mark svg{width:18px;height:18px;}
+  .nav-links{display:flex;align-items:center;gap:36px;}
+  .nav-links a{font-size:14.5px;font-weight:500;color:var(--ink-soft);transition:color .15s ease;}
+  .nav-links a:hover{color:var(--blue-700);}
+  .nav-cta{display:flex;align-items:center;gap:14px;}
+  .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px;}
+  .nav-toggle span{display:block;width:22px;height:2px;background:var(--ink);margin:5px 0;border-radius:2px;transition:transform .2s ease, opacity .2s ease;}
+
+  /* Hero */
+  .hero{
+    position:relative;
+    padding:88px 0 110px;
+    background:
+      radial-gradient(680px 380px at 82% -8%, rgba(37,99,235,.10), transparent 60%),
+      var(--bg);
+    overflow:hidden;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:64px;align-items:center;}
+  .hero h1{font-size:clamp(34px,4.4vw,54px);line-height:1.06;font-weight:800;margin:20px 0 22px;}
+  .hero h1 em{font-style:normal;color:var(--blue-600);position:relative;}
+  .hero p.lead{font-size:18px;color:var(--ink-soft);max-width:520px;margin-bottom:34px;}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:40px;}
+  .hero-trust{display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
+  .hero-trust span{font-size:13px;color:var(--ink-faint);font-weight:500;}
+  .avatars{display:flex;}
+  .avatars .a{width:30px;height:30px;border-radius:50%;border:2.5px solid #fff;margin-left:-8px;background:linear-gradient(155deg,var(--blue-100),var(--blue-500));}
+  .avatars .a:first-child{margin-left:0;}
+
+  /* Hero illustration */
+  .hero-art{position:relative;height:460px;}
+  .art-card{
+    position:absolute;background:#fff;border-radius:var(--radius-lg);
+    border:1px solid var(--border); box-shadow:var(--shadow-lg);
+    animation:float 6s ease-in-out infinite;
+  }
+  @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+
+  .card-dashboard{width:340px; left:0; top:14px; padding:20px; z-index:2;}
+  .card-dashboard .dash-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+  .card-dashboard .dash-head .dots{display:flex;gap:6px;}
+  .card-dashboard .dash-head .dots span{width:9px;height:9px;border-radius:50%;background:var(--border);}
+  .card-dashboard .dash-title{font-size:12.5px;font-weight:600;color:var(--ink-faint);font-family:'JetBrains Mono',monospace;}
+  .test-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--bg-soft-2);font-size:13px;color:var(--ink-soft);}
+  .test-row:first-of-type{border-top:none;}
+  .test-row .stat-dot{width:8px;height:8px;border-radius:50%;flex:none;}
+  .test-row .stat-dot.pass{background:var(--green);box-shadow:0 0 0 4px rgba(23,160,106,.14);}
+  .test-row .stat-dot.run{background:var(--blue-600);box-shadow:0 0 0 4px rgba(37,99,235,.14);}
+  .test-row .stat-dot.fail{background:var(--red);box-shadow:0 0 0 4px rgba(227,91,79,.14);}
+  .test-row .name{flex:1;font-weight:500;color:var(--ink);}
+  .test-row .tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-faint);}
+
+  .card-coverage{
+    width:172px; right:6px; top:0; padding:18px; z-index:3;
+    animation-delay:.6s;
+  }
+  .card-coverage .big{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:30px;color:var(--blue-700);}
+  .card-coverage .lbl{font-size:12px;color:var(--ink-faint);margin-top:2px;font-weight:500;}
+  .ring{width:52px;height:52px;border-radius:50%;background:conic-gradient(var(--blue-600) 0 92%, var(--bg-soft-2) 0);display:flex;align-items:center;justify-content:center;margin-top:14px;}
+  .ring::after{content:"";width:36px;height:36px;border-radius:50%;background:#fff;}
+
+  .card-pipeline{
+    width:300px; left:26px; bottom:6px; padding:18px 20px; z-index:3;
+    animation-delay:1.1s;
+  }
+  .card-pipeline .p-title{font-size:12px;font-weight:600;color:var(--ink-faint);font-family:'JetBrains Mono',monospace;margin-bottom:14px;letter-spacing:.03em;}
+  .p-track{display:flex;align-items:center;}
+  .p-node{width:11px;height:11px;border-radius:50%;background:var(--green);flex:none;box-shadow:0 0 0 4px rgba(23,160,106,.15);}
+  .p-node.pending{background:var(--border);box-shadow:none;}
+  .p-line{flex:1;height:2px;background:var(--green);}
+  .p-line.pending{background:var(--border);}
+
+  .card-bug{
+    width:186px; right:-4px; bottom:34px; padding:14px 16px; z-index:4;
+    animation-delay:1.7s;
+    display:flex; align-items:flex-start; gap:10px;
+  }
+  .card-bug .ico{width:30px;height:30px;border-radius:9px;background:#fdecea;display:flex;align-items:center;justify-content:center;flex:none;}
+  .card-bug .ico svg{width:16px;height:16px;color:var(--red);}
+  .card-bug .t1{font-size:12.5px;font-weight:600;}
+  .card-bug .t2{font-size:11px;color:var(--ink-faint);font-family:'JetBrains Mono',monospace;margin-top:2px;}
+
+  .art-blob{position:absolute;border-radius:50%;filter:blur(0px);z-index:0;}
+  .blob-1{width:360px;height:360px;background:radial-gradient(circle at 30% 30%, var(--blue-100), transparent 70%);right:-40px;top:-60px;}
+
+  /* Section shell */
+  section{padding:100px 0;}
+  .section-head{max-width:640px;margin:0 auto 56px;text-align:center;}
+  .section-head.left{margin:0 0 48px;text-align:left;}
+  .section-head h2{font-size:clamp(28px,3.2vw,38px);font-weight:800;margin:16px 0 14px;}
+  .section-head p{color:var(--ink-soft);font-size:16.5px;}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in-view{opacity:1;transform:translateY(0);}
+
+  /* Stats bar */
+  .stats{background:var(--ink);}
+  .stats .wrap{padding:0 28px;}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.08);border-radius:var(--radius-lg);overflow:hidden;}
+  .stat-cell{background:#0e1830;padding:34px 26px;}
+  .stat-cell .num{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:32px;color:#fff;}
+  .stat-cell .lbl{font-size:13px;color:#a9b4cc;margin-top:6px;}
+
+  /* Services */
+  .services{background:var(--bg-soft);}
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .svc-card{
+    background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);
+    padding:30px 28px; box-shadow:var(--shadow-sm);
+    transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+  }
+  .svc-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--blue-100);}
+  .svc-icon{
+    width:48px;height:48px;border-radius:13px;
+    background:var(--blue-50); border:1px solid var(--blue-100);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:20px;
+  }
+  .svc-icon svg{width:23px;height:23px;color:var(--blue-600);}
+  .svc-card h3{font-size:19px;font-weight:700;margin-bottom:10px;}
+  .svc-card p{color:var(--ink-soft);font-size:14.5px;}
+  .svc-card .svc-tools{margin-top:16px;display:flex;flex-wrap:wrap;gap:6px;}
+  .svc-tools span{
+    font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue-700);
+    background:var(--blue-50);border:1px solid var(--blue-100);
+    padding:4px 9px;border-radius:6px;
+  }
+
+  /* Process / pipeline signature section */
+  .process{background:#fff;}
+  .pipeline-rail{position:relative;margin-top:64px;}
+  .pipeline-track-bg{position:absolute;top:23px;left:0;right:0;height:2px;background:var(--border);z-index:0;}
+  .pipeline-track-fill{position:absolute;top:23px;left:0;height:2px;background:var(--blue-600);width:0%;z-index:1;transition:width 1.6s cubic-bezier(.4,0,.2,1);}
+  .pipeline-nodes{position:relative;display:grid;grid-template-columns:repeat(5,1fr);z-index:2;}
+  .p-stage{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 10px;}
+  .p-stage .num-badge{
+    width:47px;height:47px;border-radius:50%;background:#fff;border:2px solid var(--border);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px;color:var(--ink-faint);
+    transition:all .5s ease; margin-bottom:18px;
+  }
+  .p-stage.lit .num-badge{border-color:var(--blue-600);background:var(--blue-600);color:#fff;box-shadow:0 0 0 6px rgba(37,99,235,.15);}
+  .p-stage h4{font-size:15px;font-weight:700;margin-bottom:6px;}
+  .p-stage p{font-size:13px;color:var(--ink-soft);max-width:190px;}
+
+  /* Why us */
+  .why{background:var(--bg-soft);}
+  .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+  .why-list{display:flex;flex-direction:column;gap:22px;}
+  .why-item{display:flex;gap:16px;align-items:flex-start;}
+  .why-item .ico{
+    width:38px;height:38px;border-radius:11px;background:#fff;border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;flex:none;box-shadow:var(--shadow-sm);
+  }
+  .why-item .ico svg{width:18px;height:18px;color:var(--blue-600);}
+  .why-item h4{font-size:16px;font-weight:700;margin-bottom:4px;}
+  .why-item p{font-size:14px;color:var(--ink-soft);}
+
+  .why-panel{
+    background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);
+    padding:32px; box-shadow:var(--shadow-lg);
+  }
+  .why-panel .qmark{color:var(--blue-200,#a9c6ff);font-size:44px;font-family:'Plus Jakarta Sans',sans-serif;line-height:1;color:var(--blue-100);margin-bottom:6px;}
+  .why-panel blockquote{font-size:18px;font-weight:600;line-height:1.5;color:var(--ink);margin-bottom:22px;}
+  .why-panel .person{display:flex;align-items:center;gap:12px;}
+  .why-panel .person .av{width:42px;height:42px;border-radius:50%;background:linear-gradient(155deg,var(--blue-100),var(--blue-600));flex:none;}
+  .why-panel .person .name{font-weight:700;font-size:14px;}
+  .why-panel .person .role{font-size:12.5px;color:var(--ink-faint);}
+  .why-panel .metrics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:26px;padding-top:24px;border-top:1px solid var(--border);}
+  .why-panel .metrics .m-num{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:19px;color:var(--blue-700);}
+  .why-panel .metrics .m-lbl{font-size:11.5px;color:var(--ink-faint);margin-top:2px;}
+
+  /* CTA banner */
+  .cta-banner{
+    background:linear-gradient(135deg,var(--blue-700),var(--blue-900));
+    border-radius:28px; margin:0 28px; padding:64px 56px;
+    display:flex;align-items:center;justify-content:space-between;gap:40px;
+    position:relative; overflow:hidden;
+  }
+  .cta-banner::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(420px 260px at 90% 0%, rgba(255,255,255,.14), transparent 60%);
+  }
+  .cta-banner h2{color:#fff;font-size:clamp(24px,2.8vw,32px);margin-bottom:10px;max-width:480px;}
+  .cta-banner p{color:#c9d7fb;font-size:15.5px;max-width:440px;}
+  .cta-banner .cta-actions{display:flex;gap:14px;flex-wrap:wrap;position:relative;z-index:1;}
+  .cta-left{position:relative;z-index:1;}
+
+  /* Footer */
+  footer{background:var(--ink);color:#c3cbe0;padding:64px 0 28px;}
+  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.08);}
+  .foot-brand .brand{color:#fff;margin-bottom:14px;}
+  .foot-brand p{font-size:13.5px;color:#8b96b8;max-width:280px;}
+  .foot-col h5{font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;color:#7c88ac;margin-bottom:16px;font-weight:600;}
+  .foot-col ul{display:flex;flex-direction:column;gap:11px;}
+  .foot-col a{font-size:14px;color:#c3cbe0;transition:color .15s ease;}
+  .foot-col a:hover{color:#fff;}
+  .foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;font-size:13px;color:#7c88ac;flex-wrap:wrap;gap:12px;}
+  .foot-bottom a{color:#7c88ac;}
+  .foot-bottom a:hover{color:#fff;}
+
+  /* Responsive */
+  @media (max-width:980px){
+    .hero-grid, .why-grid{grid-template-columns:1fr;}
+    .hero-art{height:380px;margin-top:20px;order:-1;}
+    .svc-grid{grid-template-columns:repeat(2,1fr);}
+    .stats-grid{grid-template-columns:repeat(2,1fr);}
+    .pipeline-nodes{grid-template-columns:repeat(5,1fr);}
+    .p-stage p{display:none;}
+    .cta-banner{flex-direction:column;text-align:center;align-items:center;padding:48px 32px;}
+    .cta-left{display:flex;flex-direction:column;align-items:center;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:720px){
+    .nav-links, .nav-cta .btn-secondary{display:none;}
+    .nav-toggle{display:block;}
+    body.menu-open .nav-links{
+      display:flex;flex-direction:column;position:absolute;top:76px;left:0;right:0;
+      background:#fff;border-bottom:1px solid var(--border);padding:20px 28px;gap:18px;
+      box-shadow:var(--shadow-md);
+    }
+    .svc-grid{grid-template-columns:1fr;}
+    .stats-grid{grid-template-columns:1fr 1fr;}
+    .pipeline-nodes{grid-template-columns:repeat(5,1fr);}
+    .p-stage .num-badge{width:36px;height:36px;font-size:12px;}
+    .p-stage h4{font-size:11.5px;}
+    .pipeline-track-bg,.pipeline-track-fill{top:18px;}
+    .card-dashboard{width:290px;}
+    .card-coverage{display:none;}
+    .foot-grid{grid-template-columns:1fr;gap:28px;}
+    .cta-banner{margin:0 16px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand">
+      <span class="mark">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5L9.5 17L19 7" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      Verista QA
+    </a>
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#why">Why Us</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#contact" class="btn btn-secondary btn-sm">Book a Free Consultation</a>
+      <button class="nav-toggle" aria-label="Toggle menu" id="navToggle">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="art-blob blob-1"></div>
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow"><span class="dot"></span> Software QA &amp; Testing Partner</span>
+        <h1>Ship software your<br>users can <em>trust</em>.</h1>
+        <p class="lead">We help engineering teams catch defects before customers do — through manual, automated, performance, security, API, and mobile testing built around how you actually ship.</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn btn-primary">Book a Free Consultation</a>
+          <a href="#services" class="btn btn-secondary">View Our Services</a>
+        </div>
+        <div class="hero-trust">
+          <div class="avatars">
+            <div class="a"></div><div class="a"></div><div class="a"></div><div class="a"></div>
+          </div>
+          <span>Trusted by product &amp; engineering teams shipping weekly releases</span>
+        </div>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="art-card card-dashboard">
+          <div class="dash-head">
+            <span class="dash-title">TEST_SUITE / checkout-flow</span>
+            <div class="dots"><span></span><span></span><span></span></div>
+          </div>
+          <div class="test-row"><span class="stat-dot pass"></span><span class="name">Login &amp; auth</span><span class="tag">PASS</span></div>
+          <div class="test-row"><span class="stat-dot pass"></span><span class="name">Cart &amp; pricing</span><span class="tag">PASS</span></div>
+          <div class="test-row"><span class="stat-dot run"></span><span class="name">Payment gateway</span><span class="tag">RUNNING</span></div>
+          <div class="test-row"><span class="stat-dot fail"></span><span class="name">Coupon edge case</span><span class="tag">FAIL</span></div>
+        </div>
+
+        <div class="art-card card-coverage">
+          <div class="lbl">Coverage</div>
+          <div class="big">92%</div>
+          <div class="ring"></div>
+        </div>
+
+        <div class="art-card card-pipeline">
+          <div class="p-title">CI PIPELINE</div>
+          <div class="p-track">
+            <div class="p-node"></div><div class="p-line"></div>
+            <div class="p-node"></div><div class="p-line"></div>
+            <div class="p-node"></div><div class="p-line pending"></div>
+            <div class="p-node pending"></div>
+          </div>
+        </div>
+
+        <div class="art-card card-bug">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2v3M9 4l1 2M15 4l-1 2M4 12H2M22 12h-2M6 19l-1.5 1.5M18 19l1.5 1.5M12 8a5 5 0 00-5 5v2a5 5 0 0010 0v-2a5 5 0 00-5-5z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <div class="t1">Bug #4821 opened</div>
+            <div class="t2">P2 · assigned</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats" style="padding:0;">
+    <div class="wrap" style="padding-top:56px;padding-bottom:56px;">
+      <div class="stats-grid reveal" id="statsGrid">
+        <div class="stat-cell"><div class="num">500+</div><div class="lbl">Test cycles delivered</div></div>
+        <div class="stat-cell"><div class="num">40+</div><div class="lbl">Engineering teams supported</div></div>
+        <div class="stat-cell"><div class="num">99.2%</div><div class="lbl">Critical defect catch rate</div></div>
+        <div class="stat-cell"><div class="num">&lt;48h</div><div class="lbl">Turnaround on critical bugs</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="services">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow" style="background:#fff;"><span class="dot"></span> Scope of Work</span>
+        <h2>Testing coverage for every layer of your product</h2>
+        <p>From exploratory sessions to fully automated pipelines, we plug into your workflow at whichever stage you need us most.</p>
+      </div>
+
+      <div class="svc-grid">
+        <div class="svc-card reveal">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M9 11l3 3L22 4M21 12v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Manual Testing</h3>
+          <p>Comprehensive functional, regression, usability, and exploratory testing performed by senior QA engineers who think like your users.</p>
+        </div>
+
+        <div class="svc-card reveal">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2l1.9 4.6L18.5 8l-4.6 1.9L12 14.5l-1.9-4.6L5.5 8l4.6-1.4L12 2zM19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Automation Testing</h3>
+          <p>Fast, reliable automated suites built with the frameworks that fit your stack — designed to catch regressions before merge.</p>
+          <div class="svc-tools"><span>Selenium</span><span>Cypress</span><span>Playwright</span><span>Appium</span></div>
+        </div>
+
+        <div class="svc-card reveal">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M3 17l4-7 4 4 4-9 6 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 20h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Performance Testing</h3>
+          <p>Load, stress, endurance, and scalability testing with industry-standard tools, so your app holds up under real-world traffic.</p>
+        </div>
+
+        <div class="svc-card reveal">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v6c0 4.6-3 8.4-7 9-4-.6-7-4.4-7-9V6l7-3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9.5 12l1.8 1.8L15 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Security Testing</h3>
+          <p>Identify vulnerabilities early and protect your application against the most common and critical security risks.</p>
+        </div>
+
+        <div class="svc-card reveal">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="8" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="13" y="8" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M11 12h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <h3>API Testing</h3>
+          <p>Validate REST and GraphQL APIs for functionality, reliability, and performance — before front-end teams ever touch them.</p>
+        </div>
+
+        <div class="svc-card reveal">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="7" y="2" width="10" height="20" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M11 19h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Mobile App Testing</h3>
+          <p>Real-device testing across iOS and Android covering functionality, performance, and platform-specific edge cases.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS (signature element) -->
+  <section id="process" class="process">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow"><span class="dot"></span> How We Work</span>
+        <h2>One pipeline, from first test case to release</h2>
+        <p>Every engagement moves through the same disciplined sequence — so nothing slips between planning and production.</p>
+      </div>
+
+      <div class="pipeline-rail reveal" id="pipelineRail">
+        <div class="pipeline-track-bg"></div>
+        <div class="pipeline-track-fill" id="pipelineFill"></div>
+        <div class="pipeline-nodes" id="pipelineNodes">
+          <div class="p-stage"><div class="num-badge">1</div><h4>Plan</h4><p>Define scope, risk areas, and success criteria with your team.</p></div>
+          <div class="p-stage"><div class="num-badge">2</div><h4>Design Cases</h4><p>Write test cases that map to real user flows and edge cases.</p></div>
+          <div class="p-stage"><div class="num-badge">3</div><h4>Automate</h4><p>Build automated suites for the checks that run on every build.</p></div>
+          <div class="p-stage"><div class="num-badge">4</div><h4>Execute</h4><p>Run manual, automated, performance, and security passes.</p></div>
+          <div class="p-stage"><div class="num-badge">5</div><h4>Report &amp; Retest</h4><p>Deliver clear defect reports and verify every fix.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section id="why" class="why">
+    <div class="wrap why-grid">
+      <div>
+        <div class="section-head left reveal">
+          <span class="eyebrow" style="background:#fff;"><span class="dot"></span> Why Verista</span>
+          <h2>QA that fits into how you already ship</h2>
+        </div>
+        <div class="why-list">
+          <div class="why-item reveal">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l3 6 6 1-4.5 4.5L17.5 20 12 17l-5.5 3 1-6.5L3 9l6-1 3-6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+            <div><h4>Senior engineers only</h4><p>Every test cycle is run by QA engineers with production experience, not junior testers learning on your codebase.</p></div>
+          </div>
+          <div class="why-item reveal">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><h4>Tool-agnostic</h4><p>We work inside your existing stack and CI/CD, rather than asking you to adopt ours.</p></div>
+          </div>
+          <div class="why-item reveal">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5m0 14h16M8 15v-4m4 4V8m4 7v-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div><h4>Reports engineers actually read</h4><p>Defect reports come with reproduction steps, severity, and environment details — no back-and-forth needed.</p></div>
+          </div>
+          <div class="why-item reveal">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><h4>Fast turnaround</h4><p>Critical bugs get triaged and reported back to your team within 48 hours, not the next sprint.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="why-panel reveal">
+        <div class="qmark">&ldquo;</div>
+        <blockquote>Verista slotted into our release cycle in under a week and caught a payment bug our own team missed twice.</blockquote>
+        <div class="person">
+          <div class="av"></div>
+          <div>
+            <div class="name">Engineering Lead</div>
+            <div class="role">Mid-size SaaS platform</div>
+          </div>
+        </div>
+        <div class="metrics">
+          <div><div class="m-num">6</div><div class="m-lbl">Days to onboard</div></div>
+          <div><div class="m-num">120+</div><div class="m-lbl">Test cases written</div></div>
+          <div><div class="m-num">98%</div><div class="m-lbl">Automated coverage</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="contact" style="padding-top:0;padding-bottom:100px;">
+    <div class="cta-banner reveal">
+      <div class="cta-left">
+        <h2>Ready to ship with confidence?</h2>
+        <p>Tell us about your product and release cadence — we'll map out where testing coverage matters most and show you exactly how we'd approach it.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="mailto:hello@veristaqa.com" class="btn btn-primary">Book a Free Consultation</a>
+        <a href="#services" class="btn btn-ghost-light">View Our Services</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#top" class="brand">
+          <span class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5L9.5 17L19 7" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Verista QA
+        </a>
+        <p>Manual, automated, performance, security, API, and mobile testing for teams that ship often and can't afford to ship broken.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#services">Manual Testing</a></li>
+          <li><a href="#services">Automation Testing</a></li>
+          <li><a href="#services">Performance Testing</a></li>
+          <li><a href="#services">Security Testing</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#process">Our Process</a></li>
+          <li><a href="#why">Why Verista</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="mailto:hello@veristaqa.com">hello@veristaqa.com</a></li>
+          <li><a href="tel:+10000000000">+1 (000) 000-0000</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 Verista QA. All rights reserved.</span>
+      <span><a href="#top">Privacy Policy</a> &nbsp;·&nbsp; <a href="#top">Terms of Service</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  navToggle.addEventListener('click', () => {
+    document.body.classList.toggle('menu-open');
+  });
+  document.querySelectorAll('.nav-links a').forEach(a=>{
+    a.addEventListener('click', ()=> document.body.classList.remove('menu-open'));
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+
+  // Pipeline stage lighting
+  const pipelineRail = document.getElementById('pipelineRail');
+  const pipelineFill = document.getElementById('pipelineFill');
+  const stages = document.querySelectorAll('.p-stage');
+  let pipelineDone = false;
+  const pio = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting && !pipelineDone){
+        pipelineDone = true;
+        pipelineFill.style.width = '100%';
+        stages.forEach((s, i)=>{
+          setTimeout(()=> s.classList.add('lit'), 250 + i*260);
+        });
+        pio.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.35});
+  if(pipelineRail) pio.observe(pipelineRail);
+</script>
+
+</body>
+</html>
