@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — Verista QA</title>
+<meta name="description" content="Explore Verista QA's full testing coverage: manual, automation, performance, security, API, and mobile testing — plus how we engage with your team.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff;
+    --bg-soft:#f5f8fc;
+    --bg-soft-2:#eef4fb;
+    --ink:#0b1220;
+    --ink-soft:#54607a;
+    --ink-faint:#8592ac;
+    --blue-50:#eef5ff;
+    --blue-100:#dfebff;
+    --blue-500:#3b7bf0;
+    --blue-600:#2563eb;
+    --blue-700:#1c4fc7;
+    --blue-900:#132b6b;
+    --green:#17a06a;
+    --red:#e35b4f;
+    --amber:#e0982a;
+    --purple:#7c5cf0;
+    --border:#e5ebf4;
+    --shadow-sm: 0 1px 2px rgba(13,30,66,.06);
+    --shadow-md: 0 8px 24px rgba(13,30,66,.08);
+    --shadow-lg: 0 24px 60px rgba(13,30,66,.14);
+    --radius-lg: 20px;
+    --radius-md: 14px;
+    --radius-sm: 10px;
+    --maxw: 1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+  body{
+    margin:0;
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.55;
+  }
+  h1,h2,h3,h4{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    color:var(--ink);
+    margin:0;
+    letter-spacing:-0.02em;
+  }
+  p{margin:0;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;margin:0;padding:0;}
+  img,svg{display:block;max-width:100%;}
+  button{font-family:inherit;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px; font-weight:600; letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--blue-600);
+    background:var(--blue-50);
+    border:1px solid var(--blue-100);
+    padding:6px 14px 6px 10px;
+    border-radius:999px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex:none;box-shadow:0 0 0 3px rgba(23,160,106,.18);}
+
+  /* Buttons */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-weight:600; font-size:15px;
+    padding:13px 24px;
+    border-radius:999px;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+    white-space:nowrap;
+  }
+  .btn:focus-visible{outline:2.5px solid var(--blue-600); outline-offset:3px;}
+  .btn-primary{
+    background:var(--blue-600); color:#fff;
+    box-shadow:0 10px 24px rgba(37,99,235,.28);
+  }
+  .btn-primary:hover{background:var(--blue-700); transform:translateY(-2px); box-shadow:0 14px 30px rgba(37,99,235,.35);}
+  .btn-secondary{
+    background:#fff; color:var(--ink); border-color:var(--border);
+    box-shadow:var(--shadow-sm);
+  }
+  .btn-secondary:hover{border-color:var(--blue-600); color:var(--blue-700); transform:translateY(-2px); box-shadow:var(--shadow-md);}
+  .btn-ghost-light{background:rgba(255,255,255,.12); color:#fff; border-color:rgba(255,255,255,.35);}
+  .btn-ghost-light:hover{background:rgba(255,255,255,.2); transform:translateY(-2px);}
+  .btn-sm{padding:10px 18px; font-size:14px;}
+  .btn-text{padding:0; font-size:14px; color:var(--blue-600); gap:6px;}
+  .btn-text svg{width:15px;height:15px; transition:transform .18s ease;}
+  .btn-text:hover svg{transform:translateX(3px);}
+
+  /* Header */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(255,255,255,.82);
+    backdrop-filter:saturate(180%) blur(14px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:76px;}
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:19px;}
+  .brand .mark{
+    width:34px;height:34px;border-radius:10px;
+    background:linear-gradient(155deg,var(--blue-500),var(--blue-700));
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 16px rgba(37,99,235,.35);
+    flex:none;
+  }
+  .brand .mark svg{width:18px;height:18px;}
+  .nav-links{display:flex;align-items:center;gap:36px;}
+  .nav-links a{font-size:14.5px;font-weight:500;color:var(--ink-soft);transition:color .15s ease; position:relative;}
+  .nav-links a:hover{color:var(--blue-700);}
+  .nav-links a[aria-current="page"]{color:var(--blue-700);}
+  .nav-links a[aria-current="page"]::after{
+    content:"";position:absolute;left:0;right:0;bottom:-26px;height:2px;background:var(--blue-600);
+  }
+  .nav-cta{display:flex;align-items:center;gap:14px;}
+  .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px;}
+  .nav-toggle span{display:block;width:22px;height:2px;background:var(--ink);margin:5px 0;border-radius:2px;transition:transform .2s ease, opacity .2s ease;}
+
+  section{padding:100px 0;}
+  .section-head{max-width:640px;margin:0 auto 56px;text-align:center;}
+  .section-head.left{margin:0 0 48px;text-align:left;max-width:640px;}
+  .section-head h2{font-size:clamp(28px,3.2vw,38px);font-weight:800;margin:16px 0 14px;}
+  .section-head p{color:var(--ink-soft);font-size:16.5px;}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in-view{opacity:1;transform:translateY(0);}
+
+  /* Page header (breadcrumb hero) */
+  .page-hero{
+    padding:64px 0 56px;
+    background:
+      radial-gradient(680px 340px at 88% -20%, rgba(37,99,235,.10), transparent 60%),
+      var(--bg);
+    border-bottom:1px solid var(--border);
+  }
+  .breadcrumb{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--ink-faint);margin-bottom:22px;}
+  .breadcrumb a{color:var(--ink-faint);transition:color .15s ease;}
+  .breadcrumb a:hover{color:var(--blue-700);}
+  .breadcrumb .sep{color:var(--border);}
+  .breadcrumb .current{color:var(--ink-soft);font-weight:500;}
+  .page-hero h1{font-size:clamp(32px,4vw,48px);line-height:1.08;font-weight:800;margin:18px 0 18px;max-width:720px;}
+  .page-hero h1 em{font-style:normal;color:var(--blue-600);}
+  .page-hero p.lead{font-size:17px;color:var(--ink-soft);max-width:600px;margin-bottom:30px;}
+  .page-hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+
+  /* Jump nav */
+  .jumpnav{
+    position:sticky; top:76px; z-index:60;
+    background:rgba(255,255,255,.9); backdrop-filter:saturate(180%) blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .jumpnav-inner{display:flex;gap:8px;overflow-x:auto;padding:14px 0;scrollbar-width:none;}
+  .jumpnav-inner::-webkit-scrollbar{display:none;}
+  .jumpnav-inner a{
+    flex:none;
+    font-size:13.5px;font-weight:600;color:var(--ink-soft);
+    padding:9px 16px;border-radius:999px;border:1px solid var(--border);
+    background:#fff;
+    transition:all .15s ease;
+    display:flex;align-items:center;gap:7px;
+  }
+  .jumpnav-inner a .sw{width:7px;height:7px;border-radius:50%;flex:none;}
+  .jumpnav-inner a:hover{border-color:var(--blue-600); color:var(--blue-700);}
+  .jumpnav-inner a.active{background:var(--ink); color:#fff; border-color:var(--ink);}
+  .jumpnav-inner a.active .sw{box-shadow:0 0 0 3px rgba(255,255,255,.25);}
+
+  /* Service detail blocks */
+  .svc-detail{border-bottom:1px solid var(--border);}
+  .svc-detail:last-of-type{border-bottom:none;}
+  .svc-detail-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+  .svc-detail.flip .svc-detail-inner{direction:rtl;}
+  .svc-detail.flip .svc-detail-inner > *{direction:ltr;}
+  .svc-tag{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.05em;
+    color:var(--svc-color, var(--blue-600));
+    margin-bottom:16px;
+  }
+  .svc-tag .idx{
+    width:26px;height:26px;border-radius:8px;
+    background:var(--svc-color-bg, var(--blue-50));
+    display:flex;align-items:center;justify-content:center;
+    font-size:11.5px;
+  }
+  .svc-detail h3{font-size:27px;font-weight:800;margin-bottom:14px;}
+  .svc-detail > div > p.desc{font-size:15.5px;color:var(--ink-soft);margin-bottom:24px;max-width:480px;}
+  .svc-checklist{display:flex;flex-direction:column;gap:12px;margin-bottom:26px;}
+  .svc-checklist li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;color:var(--ink);}
+  .svc-checklist li svg{width:18px;height:18px;flex:none;margin-top:1px;color:var(--svc-color, var(--blue-600));}
+  .svc-tools-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;}
+  .svc-tools-row span{
+    font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--ink-soft);
+    background:var(--bg-soft-2);border:1px solid var(--border);
+    padding:5px 10px;border-radius:6px;
+  }
+
+  /* Visual panels per service */
+  .svc-visual{
+    background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius-lg);
+    padding:28px; min-height:320px; display:flex; flex-direction:column; justify-content:center; gap:14px;
+    box-shadow:var(--shadow-md);
+  }
+  .vp-row{
+    background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);
+    padding:14px 16px; display:flex; align-items:center; gap:12px;
+    box-shadow:var(--shadow-sm);
+  }
+  .vp-row .vp-dot{width:9px;height:9px;border-radius:50%;flex:none;background:var(--svc-color, var(--blue-600));box-shadow:0 0 0 4px color-mix(in srgb, var(--svc-color, var(--blue-600)) 15%, transparent);}
+  .vp-row .vp-text{flex:1;}
+  .vp-row .vp-label{font-size:13.5px;font-weight:600;}
+  .vp-row .vp-sub{font-size:11.5px;color:var(--ink-faint);font-family:'JetBrains Mono',monospace;margin-top:2px;}
+  .vp-row .vp-tag{
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;
+    padding:4px 9px;border-radius:6px;
+    background:var(--svc-color-bg, var(--blue-50)); color:var(--svc-color, var(--blue-600));
+  }
+  .vp-bar-track{height:8px;border-radius:99px;background:var(--bg-soft-2);overflow:hidden;flex:1;}
+  .vp-bar-fill{height:100%;border-radius:99px;background:var(--svc-color, var(--blue-600));}
+  .vp-metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .vp-metric{background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;box-shadow:var(--shadow-sm);}
+  .vp-metric .m-num{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:20px;color:var(--svc-color, var(--blue-700));}
+  .vp-metric .m-lbl{font-size:11.5px;color:var(--ink-faint);margin-top:3px;}
+
+  /* Engagement models */
+  .engage{background:var(--bg-soft);}
+  .engage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .engage-card{
+    background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);
+    padding:32px 28px; box-shadow:var(--shadow-sm);
+    display:flex; flex-direction:column;
+    transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+  }
+  .engage-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--blue-100);}
+  .engage-card.featured{border-color:var(--blue-600); box-shadow:0 16px 40px rgba(37,99,235,.16); position:relative;}
+  .engage-card .badge{
+    position:absolute; top:-13px; left:28px;
+    background:var(--blue-600); color:#fff; font-size:11.5px; font-weight:700;
+    padding:5px 12px; border-radius:999px; font-family:'JetBrains Mono',monospace; letter-spacing:.03em;
+  }
+  .engage-card h4{font-size:19px;font-weight:700;margin-bottom:6px;}
+  .engage-card .tagline{font-size:13.5px;color:var(--ink-faint);margin-bottom:20px;}
+  .engage-card .fit{
+    font-size:12.5px;color:var(--blue-700);background:var(--blue-50);border:1px solid var(--blue-100);
+    padding:9px 12px;border-radius:var(--radius-sm);margin-bottom:22px;
+  }
+  .engage-list{display:flex;flex-direction:column;gap:11px;margin-bottom:0; flex:1;}
+  .engage-list li{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;color:var(--ink-soft);}
+  .engage-list li svg{width:16px;height:16px;flex:none;margin-top:2px;color:var(--green);}
+
+  /* FAQ */
+  .faq{background:#fff;}
+  .faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px;}
+  .faq-item{border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;background:#fff;}
+  .faq-q{
+    width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding:20px 22px;background:none;border:none;cursor:pointer;text-align:left;
+    font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15.5px;color:var(--ink);
+  }
+  .faq-q .plus{
+    width:26px;height:26px;border-radius:50%;background:var(--bg-soft-2);flex:none;
+    display:flex;align-items:center;justify-content:center;position:relative;transition:transform .25s ease, background .2s ease;
+  }
+  .faq-q .plus::before, .faq-q .plus::after{content:"";position:absolute;background:var(--ink-soft);border-radius:2px;}
+  .faq-q .plus::before{width:11px;height:2px;}
+  .faq-q .plus::after{width:2px;height:11px;transition:opacity .2s ease;}
+  .faq-item.open .faq-q .plus{background:var(--blue-600); transform:rotate(180deg);}
+  .faq-item.open .faq-q .plus::before, .faq-item.open .faq-q .plus::after{background:#fff;}
+  .faq-item.open .faq-q .plus::after{opacity:0;}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .32s ease;}
+  .faq-a-inner{padding:0 22px 22px;font-size:14.5px;color:var(--ink-soft);max-width:640px;}
+
+  /* CTA banner */
+  .cta-banner{
+    background:linear-gradient(135deg,var(--blue-700),var(--blue-900));
+    border-radius:28px; margin:0 28px; padding:64px 56px;
+    display:flex;align-items:center;justify-content:space-between;gap:40px;
+    position:relative; overflow:hidden;
+  }
+  .cta-banner::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(420px 260px at 90% 0%, rgba(255,255,255,.14), transparent 60%);
+  }
+  .cta-banner h2{color:#fff;font-size:clamp(24px,2.8vw,32px);margin-bottom:10px;max-width:480px;}
+  .cta-banner p{color:#c9d7fb;font-size:15.5px;max-width:440px;}
+  .cta-banner .cta-actions{display:flex;gap:14px;flex-wrap:wrap;position:relative;z-index:1;}
+  .cta-left{position:relative;z-index:1;}
+
+  /* Footer */
+  footer{background:var(--ink);color:#c3cbe0;padding:64px 0 28px;}
+  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.08);}
+  .foot-brand .brand{color:#fff;margin-bottom:14px;}
+  .foot-brand p{font-size:13.5px;color:#8b96b8;max-width:280px;}
+  .foot-col h5{font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;color:#7c88ac;margin-bottom:16px;font-weight:600;}
+  .foot-col ul{display:flex;flex-direction:column;gap:11px;}
+  .foot-col a{font-size:14px;color:#c3cbe0;transition:color .15s ease;}
+  .foot-col a:hover{color:#fff;}
+  .foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;font-size:13px;color:#7c88ac;flex-wrap:wrap;gap:12px;}
+  .foot-bottom a{color:#7c88ac;}
+  .foot-bottom a:hover{color:#fff;}
+
+  /* Responsive */
+  @media (max-width:980px){
+    .svc-detail-inner{grid-template-columns:1fr;gap:32px;}
+    .svc-detail.flip .svc-detail-inner{direction:ltr;}
+    .svc-detail.flip .svc-visual{order:-1;}
+    .engage-grid{grid-template-columns:1fr;}
+    .cta-banner{flex-direction:column;text-align:center;align-items:center;padding:48px 32px;}
+    .cta-left{display:flex;flex-direction:column;align-items:center;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:720px){
+    .nav-links, .nav-cta .btn-secondary{display:none;}
+    .nav-toggle{display:block;}
+    body.menu-open .nav-links{
+      display:flex;flex-direction:column;position:absolute;top:76px;left:0;right:0;
+      background:#fff;border-bottom:1px solid var(--border);padding:20px 28px;gap:18px;
+      box-shadow:var(--shadow-md);
+    }
+    .jumpnav{top:76px;}
+    .foot-grid{grid-template-columns:1fr;gap:28px;}
+    .cta-banner{margin:0 16px;}
+    section{padding:72px 0;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="brand">
+      <span class="mark">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5L9.5 17L19 7" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      Verista QA
+    </a>
+    <nav class="nav-links">
+      <a href="services.html" aria-current="page">Services</a>
+      <a href="index.html#process">Process</a>
+      <a href="index.html#why">Why Us</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="index.html#contact" class="btn btn-secondary btn-sm">Book a Free Consultation</a>
+      <button class="nav-toggle" aria-label="Toggle menu" id="navToggle">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="sep">/</span>
+        <span class="current">Services</span>
+      </div>
+      <span class="eyebrow"><span class="dot"></span> Scope of Work</span>
+      <h1>Six ways we help you <em>ship without surprises</em>.</h1>
+      <p class="lead">Every engagement starts with the same question: where can something break in production that shouldn't? From there we scope the mix of manual, automated, performance, security, API, and mobile coverage your release actually needs.</p>
+      <div class="page-hero-ctas">
+        <a href="index.html#contact" class="btn btn-primary">Book a Free Consultation</a>
+        <a href="#engagement" class="btn btn-secondary">See Engagement Models</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- JUMP NAV -->
+  <nav class="jumpnav" aria-label="Jump to service">
+    <div class="wrap jumpnav-inner" id="jumpnavInner">
+      <a href="#manual" class="jn-link" data-target="manual"><span class="sw" style="background:#2563eb;"></span>Manual Testing</a>
+      <a href="#automation" class="jn-link" data-target="automation"><span class="sw" style="background:#7c5cf0;"></span>Automation Testing</a>
+      <a href="#performance" class="jn-link" data-target="performance"><span class="sw" style="background:#e0982a;"></span>Performance Testing</a>
+      <a href="#security" class="jn-link" data-target="security"><span class="sw" style="background:#e35b4f;"></span>Security Testing</a>
+      <a href="#api" class="jn-link" data-target="api"><span class="sw" style="background:#17a06a;"></span>API Testing</a>
+      <a href="#mobile" class="jn-link" data-target="mobile"><span class="sw" style="background:#2563eb;"></span>Mobile App Testing</a>
+    </div>
+  </nav>
+
+  <!-- MANUAL TESTING -->
+  <section id="manual" class="svc-detail" style="--svc-color:#2563eb; --svc-color-bg:#eef5ff;">
+    <div class="wrap svc-detail-inner">
+      <div class="reveal">
+        <span class="svc-tag"><span class="idx">01</span>MANUAL TESTING</span>
+        <h3>The judgment automation can't replicate.</h3>
+        <p class="desc">Senior QA engineers walk through your product the way a real, occasionally impatient user would — probing the flows a script would never think to try, and flagging the small friction points that quietly hurt conversion.</p>
+        <ul class="svc-checklist">
+          <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 12.5l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Functional testing against your acceptance criteria</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 12.5l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Regression passes before every release</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 12.5l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Exploratory sessions targeting your riskiest flows</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 12.5l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Usability review against real user behavior</li>
+        </ul>
+        <div class="svc-tools-row"><span>TestRail</span><span>Jira</span><span>Zephyr</span><span>BrowserStack</span></div>
+        <a href="index.html#contact" class="btn btn-secondary btn-sm">Scope a manual test cycle</a>
+      </div>
+      <div class="svc-visual reveal">
+        <div class="vp-row"><span class="vp-dot"></span><div class="vp-text"><div class="vp-label">Checkout — happy path</div><div class="vp-sub">12 steps · 4 min</div></div><span class="vp-tag">PASS</span></div>
+        <div class="vp-row"><span class="vp-dot"></span><div class="vp-text"><div class="vp-label">Guest checkout, expired promo</div><div class="vp-sub">8 steps · 3 min</div></div><span class="vp-tag">PASS</span></div>
+        <div class="vp-row"><span class="vp-dot"></span><div class="vp-text"><div class="vp-label">Form validation, screen reader</div><div class="vp-sub">6 steps · 2 min</div></div><span class="vp-tag">REVIEW</span></div>
+        <div class="vp-metric-grid">
+          <div class="vp-metric"><div class="m-num">340</div><div class="m-lbl">Test cases run / cycle avg.</div></div>
+          <div class="vp-metric"><div class="m-num">48h</div><div class="m-lbl">Cycle turnaround</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUTOMATION TESTING -->
+  <section id="automation" class="svc-detail flip" style="--svc-color:#7c5cf0; --svc-color-bg:#f2effe;">
+    <div class="wrap svc-detail-inner">
+      <div class="reveal">
+        <span class="svc-tag"><span class="idx">02</span>AUTOMATION TESTING</span>
+        <h3>Regression coverage that runs on every build.</h3>
+        <p class="desc">We build automated suites in the framework that already fits your stack, wired into your CI so the checks that matter run before a human ever has to. Written for maintainability, not just to pass once.</p>
+        <ul class="svc-checklist">
+          <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 12.5l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>End-to-end suites for your critical user journeys</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 12.5l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>CI/CD integration so tests gate every merge</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 12.5l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Cross-browser and cross-device execution</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 12.5l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Flake-rate monitoring and suite maintenance</li>
+        </ul>
+        <div class="svc-tools-row"><span>Selenium</span><span>Cypress</span><span>Playwright</span><span>Appium</span><span>GitHub Actions</span></div>
+        <a href="index.html#contact" class="btn btn-secondary btn-sm">Scope an automation build</a>
+      </div>
+      <div class="svc-visual reveal">
+        <div class="vp-row"><span class="vp-dot"></span><div class="vp-text"><div class="vp-label">e2e / checkout.spec.ts</div><div class="vp-sub">Playwright · 42 tests</div></div><span class="vp-tag">98%</span></div>
+        <div class="vp-row"><span class="vp-dot"></span><div class="vp-text"><div class="vp-label">e2e / auth.spec.ts</div><div class="vp-sub">Playwright · 19 tests</div></div><span class="vp-tag">100%</span></div>
+        <div class="vp-row" style="flex-direction:column;align-items:stretch;gap:8px;">
+          <div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--ink-soft);"><span>Suite pass rate</span><span class="mono">92.4%</span></div>
+          <div class="vp-bar-track"><div class="vp-bar-fill" style="width:92%;"></div></div>
+        </div>
+        <div class="vp-metric-grid">
+          <div class="vp-metric"><div class="m-num">6.2m</div><div class="m-lbl">Avg. suite runtime</div></div>
+          <div class="vp-metric"><div class="m-num">1,200+</div><div class="m-lbl">Automated cases maintained</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERFORMANCE TESTING -->
+  <section id="performance" class="svc-detail" style="--svc-color:#e0982a; --svc-color-bg:#fbf1e2;">
+    <div class="wrap svc-detail-inner">
+      <div class="reveal">
+        <span class="svc-tag"><span class="idx">03</span>PERFORMANCE TESTING</span>
+        <h3>Know your breaking point before your users find it.</h3>
+        <p class="desc">We simulate real traffic patterns — launch-day spikes, sustained load, sudden bursts — and tell you exactly where your app slows down or falls over, with the data to back it.</p>
+        <ul class="svc-checklist">
+          <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 12.5l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Load testing to your expected peak traffic</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 12.5l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Stress testing to find the actual ceiling</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 12.5l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Endurance runs to catch memory leaks and drift</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 12.5l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Bottleneck analysis with concrete fix recommendations</li>
+        </ul>
+        <div class="svc-tools-row"><span>JMeter</span><span>k6</span><span>Gatling</span><span>Grafana</span></div>
+        <a href="index.html#contact" class="btn btn-secondary btn-sm">Scope a load test</a>
+      </div>
+      <div class="svc-visual reveal">
+        <div class="vp-metric-grid" style="margin-bottom:4px;">
+          <div class="vp-metric"><div class="m-num">2,400</div><div class="m-lbl">Concurrent users simulated</div></div>
+          <div class="vp-metric"><div class="m-num">180ms</div><div class="m-lbl">p95 response time</div></div>
+        </div>
+        <div class="vp-row" style="flex-direction:column;align-items:stretch;gap:8px;">
+          <div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--ink-soft);"><span>Error rate under peak load</span><span class="mono">0.3%</span></div>
+          <div class="vp-bar-track"><div class="vp-bar-fill" style="width:8%;"></div></div>
+        </div>
+        <div class="vp-row"><span class="vp-dot"></span><div class="vp-text"><div class="vp-label">Checkout API — sustained load</div><div class="vp-sub">30 min · 500 req/s</div></div><span class="vp-tag">STABLE</span></div>
+        <div class="vp-row"><span class="vp-dot"></span><div class="vp-text"><div class="vp-label">Image upload — burst test</div><div class="vp-sub">2 min · 5x spike</div></div><span class="vp-tag">DEGRADED</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECURITY TESTING -->
+  <section id="security" class="svc-detail flip" style="--svc-color:#e35b4f; --svc-color-bg:#fdecea;">
+    <div class="wrap svc-detail-inner">
+      <div class="reveal">
+        <span class="svc-tag"><span class="idx">04</span>SECURITY TESTING</span>
+        <h3>Find the gaps before they find your users.</h3>
+        <p class="desc">We test against the vulnerability classes attackers actually use — not a generic checklist — and hand back findings ranked by real-world exploitability, not just severity scores.</p>
+        <ul class="svc-checklist">
+          <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 12.5l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>OWASP Top 10 coverage across web and API surfaces</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 12.5l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Authentication, session, and access-control review</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 12.5l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Dependency and configuration vulnerability scanning</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 12.5l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Findings ranked by exploitability, not just CVSS</li>
+        </ul>
+        <div class="svc-tools-row"><span>OWASP ZAP</span><span>Burp Suite</span><span>Nmap</span><span>Snyk</span></div>
+        <a href="index.html#contact" class="btn btn-secondary btn-sm">Scope a security review</a>
+      </div>
+      <div class="svc-visual reveal">
+        <div class="vp-row"><span class="vp-dot"></span><div class="vp-text"><div class="vp-label">Broken access control</div><div class="vp-sub">Admin route · unauthenticated</div></div><span class="vp-tag">CRITICAL</span></div>
+        <div class="vp-row"><span class="vp-dot"></span><div class="vp-text"><div class="vp-label">Outdated dependency</div><div class="vp-sub">Known CVE · patch available</div></div><span class="vp-tag">HIGH</span></div>
+        <div class="vp-row"><span class="vp-dot"></span><div class="vp-text"><div class="vp-label">Verbose error messages</div><div class="vp-sub">Stack trace exposed</div></div><span class="vp-tag">LOW</span></div>
+        <div class="vp-metric-grid">
+          <div class="vp-metric"><div class="m-num">120+</div><div class="m-lbl">Checks per engagement</div></div>
+          <div class="vp-metric"><div class="m-num">100%</div><div class="m-lbl">Critical findings retested</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- API TESTING -->
+  <section id="api" class="svc-detail" style="--svc-color:#17a06a; --svc-color-bg:#e8f7f1;">
+    <div class="wrap svc-detail-inner">
+      <div class="reveal">
+        <span class="svc-tag"><span class="idx">05</span>API TESTING</span>
+        <h3>Validated before the front end ever calls it.</h3>
+        <p class="desc">We test REST and GraphQL contracts directly — correctness, error handling, edge cases, and performance — so integration bugs get caught at the source instead of surfacing three layers up in the UI.</p>
+        <ul class="svc-checklist">
+          <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 12.5l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Contract and schema validation</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 12.5l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Error handling and edge-case input testing</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 12.5l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Rate limiting, pagination, and auth flows</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 12.5l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Automated regression suites per endpoint</li>
+        </ul>
+        <div class="svc-tools-row"><span>Postman</span><span>REST Assured</span><span>Swagger</span><span>Newman</span></div>
+        <a href="index.html#contact" class="btn btn-secondary btn-sm">Scope an API test suite</a>
+      </div>
+      <div class="svc-visual reveal">
+        <div class="vp-row"><span class="vp-dot"></span><div class="vp-text"><div class="vp-label mono">POST /v1/orders</div><div class="vp-sub">18 assertions</div></div><span class="vp-tag">200</span></div>
+        <div class="vp-row"><span class="vp-dot"></span><div class="vp-text"><div class="vp-label mono">GET /v1/orders/:id</div><div class="vp-sub">Invalid ID, malformed token</div></div><span class="vp-tag">4XX</span></div>
+        <div class="vp-row"><span class="vp-dot"></span><div class="vp-text"><div class="vp-label mono">PATCH /v1/inventory</div><div class="vp-sub">Concurrent write test</div></div><span class="vp-tag">200</span></div>
+        <div class="vp-metric-grid">
+          <div class="vp-metric"><div class="m-num">240+</div><div class="m-lbl">Endpoints under test</div></div>
+          <div class="vp-metric"><div class="m-num">99.6%</div><div class="m-lbl">Contract pass rate</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOBILE TESTING -->
+  <section id="mobile" class="svc-detail flip" style="--svc-color:#2563eb; --svc-color-bg:#eef5ff;">
+    <div class="wrap svc-detail-inner">
+      <div class="reveal">
+        <span class="svc-tag"><span class="idx">06</span>MOBILE APP TESTING</span>
+        <h3>Tested on real devices, not just simulators.</h3>
+        <p class="desc">Fragmentation is the mobile tax — we pay it so you don't. Real-device coverage across iOS and Android catches the OS-version quirks, screen-size breaks, and permission-flow bugs that emulators miss.</p>
+        <ul class="svc-checklist">
+          <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 12.5l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Real-device testing across iOS and Android</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 12.5l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>OS-version and screen-size compatibility</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 12.5l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Push notifications, permissions, and deep links</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 12.5l2.3 2.3 4.7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Battery, memory, and offline-mode behavior</li>
+        </ul>
+        <div class="svc-tools-row"><span>Appium</span><span>Firebase Test Lab</span><span>BrowserStack App Live</span><span>XCTest</span></div>
+        <a href="index.html#contact" class="btn btn-secondary btn-sm">Scope a mobile test pass</a>
+      </div>
+      <div class="svc-visual reveal">
+        <div class="vp-row"><span class="vp-dot"></span><div class="vp-text"><div class="vp-label">iPhone 15 · iOS 18</div><div class="vp-sub">Onboarding + push permissions</div></div><span class="vp-tag">PASS</span></div>
+        <div class="vp-row"><span class="vp-dot"></span><div class="vp-text"><div class="vp-label">Pixel 8 · Android 15</div><div class="vp-sub">Deep link from notification</div></div><span class="vp-tag">PASS</span></div>
+        <div class="vp-row"><span class="vp-dot"></span><div class="vp-text"><div class="vp-label">Galaxy A14 · Android 13</div><div class="vp-sub">Low-memory, background resume</div></div><span class="vp-tag">FAIL</span></div>
+        <div class="vp-metric-grid">
+          <div class="vp-metric"><div class="m-num">30+</div><div class="m-lbl">Real devices covered</div></div>
+          <div class="vp-metric"><div class="m-num">2</div><div class="m-lbl">Platforms, one report</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENGAGEMENT MODELS -->
+  <section id="engagement" class="engage">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow" style="background:#fff;"><span class="dot"></span> How We Engage</span>
+        <h2>Pick the model that fits your team</h2>
+        <p>Some teams need one focused cycle before a launch. Others need QA embedded in every sprint. We do both — and we'll tell you honestly which one your product needs.</p>
+      </div>
+
+      <div class="engage-grid">
+        <div class="engage-card reveal">
+          <h4>Project-Based</h4>
+          <p class="tagline">A defined scope, a defined end date.</p>
+          <div class="fit">Best for: a pre-launch audit, a major release, or a one-off security review.</div>
+          <ul class="engage-list">
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Fixed scope, fixed timeline, fixed price</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Full test plan and defect report delivered</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>One retest pass on critical fixes included</li>
+          </ul>
+        </div>
+
+        <div class="engage-card featured reveal">
+          <span class="badge">MOST COMMON</span>
+          <h4>Dedicated QA Team</h4>
+          <p class="tagline">A standing team, embedded in your sprints.</p>
+          <div class="fit">Best for: products shipping weekly or biweekly that need QA in every cycle.</div>
+          <ul class="engage-list">
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Same engineers every sprint — real product context</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Test cases and automation grow with your codebase</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Direct Slack access, no ticket queue</li>
+          </ul>
+        </div>
+
+        <div class="engage-card reveal">
+          <h4>Staff Augmentation</h4>
+          <p class="tagline">One or more engineers inside your team.</p>
+          <div class="fit">Best for: teams with QA processes already in place who just need more hands.</div>
+          <ul class="engage-list">
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Engineers work inside your tools and workflow</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Scale up or down month to month</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>No recruiting, onboarding, or bench cost</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow"><span class="dot"></span> Common Questions</span>
+        <h2>Before you book a call</h2>
+      </div>
+      <div class="faq-list reveal" id="faqList">
+        <div class="faq-item open">
+          <button class="faq-q"><span>How fast can you start?</span><span class="plus"></span></button>
+          <div class="faq-a" style="max-height:200px;"><div class="faq-a-inner">Most engagements kick off within a week of the scoping call — we spend the first few days getting access, mapping your critical flows, and agreeing on what "done" looks like for the cycle.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q"><span>Do we need existing test cases or documentation?</span><span class="plus"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">No. If you have them, we'll use them as a starting point. If you don't, we write test cases from your product itself and your team's walkthroughs — that's part of the engagement, not an extra step.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q"><span>Can you work inside our existing CI/CD pipeline?</span><span class="plus"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Yes — we're tool-agnostic by design. Automated suites are built to run inside whatever pipeline you already use, rather than asking you to stand up new infrastructure.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q"><span>What happens after a bug is reported?</span><span class="plus"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Every defect report ships with reproduction steps, severity, and environment details. Once your team pushes a fix, we retest it against the original report and confirm closure — no back-and-forth needed to clarify what broke.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q"><span>How is pricing structured?</span><span class="plus"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">It depends on the engagement model — project-based work is scoped and quoted upfront, while dedicated teams and staff augmentation are billed monthly based on the coverage you need. We'll walk through the right fit on the consultation call.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding-top:0;padding-bottom:100px;">
+    <div class="cta-banner reveal">
+      <div class="cta-left">
+        <h2>Not sure which service fits?</h2>
+        <p>Tell us about your product and release cadence — we'll map out where testing coverage matters most and recommend the right mix.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="mailto:hello@veristaqa.com" class="btn btn-primary">Book a Free Consultation</a>
+        <a href="index.html" class="btn btn-ghost-light">Back to Home</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="index.html" class="brand">
+          <span class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5L9.5 17L19 7" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Verista QA
+        </a>
+        <p>Manual, automated, performance, security, API, and mobile testing for teams that ship often and can't afford to ship broken.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#manual">Manual Testing</a></li>
+          <li><a href="#automation">Automation Testing</a></li>
+          <li><a href="#performance">Performance Testing</a></li>
+          <li><a href="#security">Security Testing</a></li>
+          <li><a href="#api">API Testing</a></li>
+          <li><a href="#mobile">Mobile App Testing</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="index.html#process">Our Process</a></li>
+          <li><a href="index.html#why">Why Verista</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="mailto:hello@veristaqa.com">hello@veristaqa.com</a></li>
+          <li><a href="tel:+10000000000">+1 (000) 000-0000</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 Verista QA. All rights reserved.</span>
+      <span><a href="index.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="index.html">Terms of Service</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  navToggle.addEventListener('click', () => {
+    document.body.classList.toggle('menu-open');
+  });
+  document.querySelectorAll('.nav-links a').forEach(a=>{
+    a.addEventListener('click', ()=> document.body.classList.remove('menu-open'));
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+
+  // Jump nav active-state on scroll
+  const jnLinks = document.querySelectorAll('.jn-link');
+  const svcSections = Array.from(jnLinks).map(l => document.getElementById(l.dataset.target));
+  const jnIO = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      const link = document.querySelector(`.jn-link[data-target="${entry.target.id}"]`);
+      if(entry.isIntersecting){
+        jnLinks.forEach(l=>l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, {rootMargin:"-40% 0px -50% 0px", threshold:0});
+  svcSections.forEach(s => s && jnIO.observe(s));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const item = btn.closest('.faq-item');
+      const answer = item.querySelector('.faq-a');
+      const isOpen = item.classList.contains('open');
+
+      document.querySelectorAll('.faq-item.open').forEach(openItem=>{
+        if(openItem !== item){
+          openItem.classList.remove('open');
+          openItem.querySelector('.faq-a').style.maxHeight = null;
+        }
+      });
+
+      if(isOpen){
+        item.classList.remove('open');
+        answer.style.maxHeight = null;
+      } else {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + "px";
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
